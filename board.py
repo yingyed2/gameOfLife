@@ -42,29 +42,33 @@ def select(board):
     print("Type 'done' when you are finished.\n")
 
     while True:
-        # Prompt the user for input
+
         user_input = input("Enter row and column (e.g., 1 2): ")
 
-        # Check if the user wants to finish
         if user_input.lower() == 'done':
             print("Selection complete.\n")
             break
 
-        # Try to parse the input
-        try:
-            # Split the input into row and column
-            row, col = user_input.split()
-            row = int(row)
-            col = int(col)
+        # .split() divides the whitespaces in the user input
+        coordinates = user_input.split()
+        if len(coordinates) != 2:
+            print("Invalid input. Please enter exactly two numbers separated by a space.")
+            continue
 
-            # Validate the coordinates
-            if 0 <= row < len(board) and 0 <= col < len(board[0]):
-                # Set the specified cell to alive
-                board[row][col] = 1
-                print(f"Cell ({row}, {col}) is alive.")
-            else:
-                print("Invalid coordinates.")
+        rowCoor, colCoor = coordinates
+        if not rowCoor.isdigit() or not colCoor.isdigit():
+            print("Invalid input. Please enter two positive integers.")
+            continue
 
-        except ValueError:
-            # Handle invalid input
-            print("Invalid input. Please enter two integers separated by a space.")
+        row = int(rowCoor)
+        col = int(colCoor)
+
+        if row < 0 or row >= len(board) or col < 0 or col >= len(board[0]):
+            print("Invalid. Coordinates do not exist within the board's bound.")
+            continue
+
+        board[row][col] = 1
+        print(f"Cell ({row}, {col}) is alive.")
+"""
+allows the user to set initial conditions
+"""
