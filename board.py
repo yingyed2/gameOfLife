@@ -43,14 +43,14 @@ def select(board):
 
     while True:
 
-        user_input = input("Enter row and column (e.g., 1 2): ")
+        userInput = input("Enter row and column (e.g., 1 2): ")
 
-        if user_input.lower() == 'done':
+        if userInput.lower() == 'done':
             print("Selection complete.\n")
             break
 
         # .split() divides the whitespaces in the user input
-        coordinates = user_input.split()
+        coordinates = userInput.split()
         if len(coordinates) != 2:
             print("Invalid input. Please enter exactly two numbers separated by a space.")
             continue
@@ -71,4 +71,15 @@ def select(board):
         print(f"Cell ({row}, {col}) is alive.")
 """
 allows the user to set initial conditions
+"""
+
+def empty(board):
+    
+    for row in board:
+        for cell in row:
+            if cell == 1:
+                return False
+    return True
+"""
+checks if the board is empty
 """

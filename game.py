@@ -1,5 +1,3 @@
-from board import initBoard, printBoard, select
-
 def adjacent(board, row, col):
     rows = len(board)
     cols = len(board[0]) # all rows have the same no. of col
@@ -19,7 +17,39 @@ def adjacent(board, row, col):
 trickiest function so far
 explain the function without wrapping first
 teach by example
-mod is like a clock
+mod acts periodically
+"""
+
+def applyRules(board):
+
+    rows = len(board)
+    cols = len(board[0])
+    new_board = []
+
+    # initializing a new board
+    for row in range(rows):
+        new_row = []
+        for col in range(cols):
+            new_row.append(0)
+        new_board.append(new_row)
+
+    for row in range(rows):
+        for col in range(cols):
+            live_neighbors = adjacent(board, row, col)
+
+            if board[row][col] == 1: # alive
+                if live_neighbors < 2 or live_neighbors > 3:
+                    new_board[row][col] = 0 # underpopulation & overpopulation
+                else:
+                    new_board[row][col] = 1 # continuity
+            else: # dead
+                if live_neighbors == 3:
+                    new_board[row][col] = 1
+
+    return new_board
+"""
+applies the rules of the game to generate the next state
+we don't call initBoard() to prevent unforeseen dependencies
 """
 
 
