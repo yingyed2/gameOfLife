@@ -7,11 +7,15 @@ def main():
     select(board)
     printBoard(board)
 
+    generation = 0 # generation counter
+
     while True:
         userInput = input("Press 'Enter' to continue or type 'quit' to exit: \n")
 
         if userInput == "":
             board = applyRules(board)
+            generation += 1
+            print(f"Generation: {generation}")
             printBoard(board)
 
             if empty(board):
@@ -23,6 +27,7 @@ def main():
                     printBoard(board)
                     select(board)
                     printBoard(board)
+                    generation = 0 # reset
                 else:
                     print("Exiting...")
                     break
