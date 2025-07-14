@@ -1,5 +1,38 @@
-def initBoard():
+import copy
+"""
+we use the copy module to create deep copies
+deep copies are important for avoiding shared references
+"""
 
+
+class BoardState:
+    def __init__(self):
+        self.board = None
+        self.previousStates = []
+
+    def saveState(self):
+        self.previousStates.append(copy.deepcopy(self.board))
+
+    def undo(self):
+        if self.previousStates:
+            self.board = self.previousStates.pop()
+            return True
+        return False
+"""
+LIFO behavior
+"""
+
+
+def reset(boardState):
+    boardState.board = initBoard()
+    boardState.previousStates = []
+    print("Game has been reset!")
+"""
+resetting the game
+"""
+
+
+def initBoard():
     rows = 5
     cols = 5
 
@@ -73,8 +106,9 @@ def select(board):
 allows the user to set initial conditions
 """
 
+
 def empty(board):
-    
+
     for row in board:
         for cell in row:
             if cell == 1:

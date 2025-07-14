@@ -51,6 +51,3 @@ def applyRules(board):
 applies the rules of the game to generate the next state
 we don't call initBoard() to prevent unforeseen dependencies
 """
-
-
-
